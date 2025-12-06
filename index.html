@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lassi Store – Basic Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Lassi Store – Ameerpet, Hyderabad. Fresh, thick and tasty lassi." />
+  <style>
+    :root {
+      --primary: #f6b800;   /* warm yellow */
+      --primary-dark: #e09f00;
+      --bg: #fffbea;
+      --text: #222222;
+      --muted: #666666;
+      --card-bg: #ffffff;
+      --accent: #ff8a5c;
+      --radius-lg: 18px;
+      --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 251, 234, 0.95);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .nav { padding: 0.6rem 0; display: flex; flex-direction: column; gap: 0.4rem; }
+
+    @media (min-width: 640px) {
+      .nav { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+
+    .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.1rem; }
+    .logo-mark {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff8d1, #f6b800);
+      box-shadow: 0 4px 12px rgba(246, 184, 0, 0.4);
+      display: flex; align-items: center; justify-content: center; font-size: 1.05rem;
+    }
+    .logo-sub { font-size: 0.7rem; color: var(--muted); font-weight: normal; }
+
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 0.2rem; }
+    .nav-links a { padding: 0.28rem 0.8rem; border-radius: 999px; background: rgba(255, 255, 255, 0.9); }
+    .nav-cta {
+      margin-left: auto; padding: 0.35rem 0.9rem; border-radius: 999px;
+      background: var(--primary); color: #000; font-weight: 600; font-size: 0.85rem;
+      box-shadow: 0 4px 10px rgba(246, 184, 0, 0.5); border: none; cursor: pointer;
+    }
+
+    /* HERO */
+    .hero { padding: 1.6rem 0 1.4rem; }
+    .hero-grid { display: flex; flex-direction: column; gap: 1.4rem; }
+    
+    @media (min-width: 820px) {
+      .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 2.2rem; }
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem;
+      padding: 0.18rem 0.6rem; border-radius: 999px; background: rgba(246, 184, 0, 0.16);
+      color: #7b5c00; margin-bottom: 0.55rem;
+    }
+
+    .hero-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.4rem; line-height: 1.2; }
+    .hero-highlight { color: #b64700; }
+    .hero-subtitle { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; max-width: 30rem; }
+
+    .hero-actions { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 0.9rem; }
+    @media (min-width: 600px) { .hero-actions { flex-direction: row; } }
+
+    .btn {
+      border-radius: 999px; border: none; cursor: pointer; font-size: 0.95rem;
+      font-weight: 600; padding: 0.7rem 1.2rem; display: inline-flex; align-items: center;
+      justify-content: center; gap: 0.4rem; width: 100%;
+    }
+    @media (min-width: 600px) { .btn { width: auto; } }
+
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #000; box-shadow: var(--shadow-soft); }
+    .btn-outline { background: transparent; border: 1px solid rgba(0, 0, 0, 0.15); color: #333; }
+
+    /* MENU */
+    .menu-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+    @media (min-width: 720px) { .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+    .menu-item { background: var(--card-bg); border-radius: var(--radius-lg); padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+    .menu-name-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem; }
+    .menu-name { font-weight: 700; font-size: 1rem; }
+    .menu-price { font-weight: 700; color: #b64700; }
+    .menu-desc { font-size: 0.85rem; color: var(--muted); }
+
+    /* GALLERY */
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 1rem; }
+    .gallery-item { border-radius: 12px; overflow: hidden; height: 100px; background: #eee; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* MAP */
+    .map-wrapper { border-radius: 14px; overflow: hidden; border: 1px solid rgba(0, 0, 0, 0.06); height: 200px; margin-top: 1rem; }
+    
+    section { padding: 2rem 0; }
+    .section-heading h2 { font-size: 1.4rem; margin-bottom: 0.5rem; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container nav">
+        <div class="logo">
+          <div class="logo-mark">🥤</div>
+          <div>Lassi Store <div class="logo-sub">Balkampet</div></div>
+        </div>
+        <a href="tel:+917989585296" class="nav-cta">Call Now</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">⭐ 4.0 Rating on Google</div>
+            <h1 class="hero-title">Real Taste of <span class="hero-highlight">Lassi</span> in Hyderabad</h1>
+            <p class="hero-subtitle">Thick, creamy, and chilled. The perfect refresher for your day. Open until 1:00 AM.</p>
+            <div class="hero-actions">
+              <a href="tel:+917989585296" class="btn btn-primary">📞 Order Now</a>
+              <a href="https://wa.me/917989585296" class="btn btn-outline">💬 WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Our Menu</h2>
+            <p style="color:var(--muted)">Simple prices. Great taste.</p>
+          </div>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <div class="menu-name-row"><span class="menu-name">Sweet Lassi</span><span class="menu-price">₹60</span></div>
+              <div class="menu-desc">Thick & traditional</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-name-row"><span class="menu-name">Mango Lassi</span><span class="menu-price">₹80</span></div>
+              <div class="menu-desc">Fresh mango pulp</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-name-row"><span class="menu-name">Dry Fruit Lassi</span><span class="menu-price">₹110</span></div>
+              <div class="menu-desc">Loaded with cashews</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-name-row"><span class="menu-name">Chocolate Shake</span><span class="menu-price">₹90</span></div>
+              <div class="menu-desc">Rich cocoa blend</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="container">
+          <div class="section-heading"><h2>Gallery</h2></div>
+          <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?q=80&w=200&fit=crop" alt="Lassi"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1577805947697-b9843892531b?q=80&w=200&fit=crop" alt="Shake"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?q=80&w=200&fit=crop" alt="Store"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="location">
+        <div class="container">
+          <div class="section-heading"><h2>Find Us</h2></div>
+          <div class="menu-item">
+            <p><strong>Lassi Store</strong><br>ShivBagh, Balkampet, Hyderabad</p>
+            <div class="map-wrapper">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.264775432326!2d78.4484618!3d17.4389161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb915d64faae29%3A0x6b3ea829c1a65a1e!2sLassi%20Store!5e0!3m2!1sen!2sin!4v1715000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div style="margin-top:1rem; text-align:center;">
+                <a href="https://maps.google.com/?cid=7727798907910380062" target="_blank" style="color:blue; text-decoration:underline;">Open in Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="text-align:center; padding: 2rem; color: #888; font-size: 0.8rem;">
+      &copy; <span id="year"></span> Lassi Store. <br>Built by Ashish Patel.
+    </footer>
+  </div>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
